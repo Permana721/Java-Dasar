@@ -28,5 +28,7 @@ public class Matematika {
 
         d--;
         System.out.println(d);
+
+        System.out.println(!false);
     }
 }

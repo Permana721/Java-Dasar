@@ -1,3 +1,5 @@
+package Variabel;
+
 public class Variable {
     public static void main(String[] args) {
         String name;
@@ -19,7 +21,8 @@ public class Variable {
         var lastName = "Dharma";
 
         // var company; error(kalau mau pake "var" isi dari variabel harus langsung di deklarasi)
-        // company = "IPUH Corp"; 
+        var company = "IPUH Corp";
+        System.out.println(company);
 
         // final String application = "Belajar Java";
         // application = "Belajar PHP"; error karena final = const

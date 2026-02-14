@@ -28,11 +28,11 @@ public class SwitchStatement {
             default -> System.out.println("Anda mungkin salah jurusan");
         }
 
+        // Switch tanpa yield
         String ucapan;
         switch (nilai) {
             case "A" -> ucapan = ("Anda lulus dengan baik");
-            case "B" -> ucapan = ("Nilai anda cukup baik");
-            case "C" -> ucapan = ("Nilai anda perlu perbaikan");
+            case "B", "C" -> ucapan = ("Nilai anda cukup baik");
             case "D" -> ucapan = ("Anda  tidak lulus");
             default -> ucapan = ("Anda mungkin salah jurusan");
         }
@@ -41,8 +41,7 @@ public class SwitchStatement {
         // Switch dengan yield
         ucapan = switch (nilai){
             case "A": yield "Anda lulus dengan baik";
-            case "B": yield "Nilai anda cukup baik";
-            case "C": yield "Nilai anda perlu perbaikan";
+            case "B", "C": yield "Nilai anda cukup baik";
             case "D": yield "Anda  tidak lulus";
             default: yield  "Anda mungkin salah jurusan";
         };
