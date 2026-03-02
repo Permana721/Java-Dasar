@@ -3,10 +3,6 @@ package _13_IfStatement;
 Dalam Java, if adalah salah satu kata kunci yang digunakan untuk percabangan
 Percabangan artinya kita bisa mengeksekusi kode program tertentu ketika suatu kondisi terpenuhi
 Hampir di semua bahasa pemrograman mendukung if expression
-Sintaks if expression:
-    if (kondisi) {
-        // kode yang akan dieksekusi jika kondisi bernilai true
-    }
  */
 public class IfStatement {
     static void main(String[] args) {
