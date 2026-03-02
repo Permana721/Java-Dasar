@@ -3,7 +3,6 @@
 void main() {
   //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
   // to see how IntelliJ IDEA suggests fixing it.
-  // You can also press <shortcut actionId="ShowIntentionActions"/> and choose "Fix all 'Redundant code' problems" to automatically clean up your code.
   IO.println(String.format("Hello and welcome!"));
 
   for (int i = 1; i <= 5; i++) {
