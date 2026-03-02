@@ -2,6 +2,7 @@ package _26_RecursiveMethod;
 /*
 Recursive method adalah kemampuan method memanggil method dirinya sendiri
 Kadang memang ada banyak problem, yang lebih mudah diselesaikan menggunakan recursive method, seperti contohnya kasus factorial
+akan tetapi, kita juga bisa menyelesaikan kasus factorial menggunakan loop, jadi tidak harus menggunakan recursive method, semua tergantung kebutuhan kita
  */
 public class RecursiveMethod {
     static void main(String[] args) {

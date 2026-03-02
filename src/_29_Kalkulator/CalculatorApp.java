@@ -1,9 +1,9 @@
 package _29_Kalkulator;
 import java.util.Scanner;
-
+// Program Kalkulator Sederhana
 public class CalculatorApp {
     public static void main(String[] args) {
-        int hasil;
+        int hasil; // Variabel untuk menyimpan hasil operasi
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Masukkan angka 1: ");
