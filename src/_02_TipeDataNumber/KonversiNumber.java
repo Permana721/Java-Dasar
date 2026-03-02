@@ -5,9 +5,10 @@ public class KonversiNumber {
         byte iniByte = 100;
         short iniShort = iniByte;
         int iniInt = iniShort;
+        // System.out.println(iniInt); // Output: 100
 
         int iniInt2 = 1000;
         byte iniByte2 = (byte) iniInt2;
-        //Hallo
+        // System.out.println(iniByte2); // Output: -24 (overflow terjadi karena nilai melebihi batas byte)
     }
 }

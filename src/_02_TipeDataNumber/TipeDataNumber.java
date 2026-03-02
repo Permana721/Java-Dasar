@@ -18,6 +18,7 @@ public class TipeDataNumber {
 
         // Dapat menggunakan underscore untuk memudahkan menghitung angka yang sangat banyak
         int amount = 1_000_000_000;
+        // System.out.println(amount); // Output: 1000000000
 
     }
 }
