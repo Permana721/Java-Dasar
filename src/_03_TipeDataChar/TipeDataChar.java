@@ -12,8 +12,5 @@ public class TipeDataChar {
         System.out.println("P");
         System.out.println("E");
         System.out.println("R");
-        // Output: P
-        //         E
-        //         R
     }
 }

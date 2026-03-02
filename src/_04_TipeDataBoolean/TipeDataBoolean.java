@@ -13,7 +13,5 @@ public class TipeDataBoolean {
 
         System.out.println(benar);
         System.out.println(salah);
-        // Output: true
-        //         false
     }
 }
