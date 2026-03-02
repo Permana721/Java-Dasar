@@ -2,18 +2,7 @@ package _14_SwitchStatement;
 /*
 Kadang kita hanya butuh menggunakan kondisi sederhana di if statement, seperti hanya menggunakan perbandingan ==
 Switch adalah statement percabangan yang sama dengan if, namun  lebih sederhana cara pembuatannya
-Kondisi di switch statement hanya untuk perbandingan ==
-Sintaks:
-    switch (ekspresi) {
-        case nilai1:
-            // kode yang dijalankan jika ekspresi == nilai1
-            break;
-        case nilai2:
-            // kode yang dijalankan jika ekspresi == nilai2
-            break;
-        default:
-            // kode yang dijalankan jika ekspresi tidak sama dengan semua nilai
-    }
+Kondisi di switch statement hanya untuk perbandingan == saja, tidak bisa menggunakan operator lain seperti >, <, !=, dan lain-lain
  */
 public class SwitchStatement {
     public static void main(String[] args) {
