@@ -1,49 +1,78 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-FILES=$(git diff --cached --name-only)
-STAT=$(git diff --cached --stat)
-DIFF=$(git diff --cached | head -n 400)
+MODEL="mistral"   # Ganti sesuai model lokal kamu
+MAX_DIFF_LINES=300
 
-if [ -z "$FILES" ]; then
-  echo "No staged files."
-  exit 1
-fi
+function get_changed_files() {
+    git status --porcelain | awk '{print $2}'
+}
 
-PROMPT="You are a senior engineer.
+function generate_commit_message() {
+    local file="$1"
 
-Generate ONE conventional commit message.
+    diff_content=$(git diff "$file" | head -n $MAX_DIFF_LINES)
+
+    prompt="
+You are an expert software engineer.
+Generate a concise and professional git commit message
+using Conventional Commits standard.
 
 Rules:
-- Max 60 characters
-- MUST include the main package name
-- Be specific
-- Only output the commit message
+- Use one of: feat, fix, refactor, chore, docs, style, test, perf
+- Format: type(scope): short summary
+- Maximum 72 characters
+- No explanation, only the commit message
 
-Changed files:
-$FILES
+File: $file
 
-Summary:
-$STAT
-
-Patch:
-$DIFF
+Diff:
+$diff_content
 "
 
-MESSAGE=$(echo "$PROMPT" | ollama run mistral 2>/dev/null)
+    echo "$prompt" | ollama run "$MODEL"
+}
 
-# Jika ollama gagal
-if [ $? -ne 0 ]; then
-  echo "Ollama failed. Commit aborted."
-  exit 1
-fi
+while true; do
+    mapfile -t files < <(get_changed_files)
 
-# Jika output kosong
-if [ -z "$MESSAGE" ]; then
-  echo "Empty commit message. Commit aborted."
-  exit 1
-fi
+    if [ ${#files[@]} -eq 0 ]; then
+        echo "Tidak ada file yang berubah."
+        exit 0
+    fi
 
-echo "Generated message:"
-echo "$MESSAGE"
+    echo "==== Pilih file yang ingin di-commit ===="
+    for i in "${!files[@]}"; do
+        echo "$((i+1)). ${files[$i]}"
+    done
+    echo "0. Keluar"
+    echo "=========================================="
 
-git commit -m "$MESSAGE"
+    read -p "Masukkan nomor: " choice
+
+    if [ "$choice" -eq 0 ]; then
+        exit 0
+    fi
+
+    if [ "$choice" -gt 0 ] && [ "$choice" -le "${#files[@]}" ]; then
+        selected_file="${files[$((choice-1))]}"
+
+        echo "Generating commit message untuk $selected_file..."
+        commit_msg=$(generate_commit_message "$selected_file")
+
+        echo "----------------------------------"
+        echo "Suggested Commit Message:"
+        echo "$commit_msg"
+        echo "----------------------------------"
+
+        read -p "Gunakan commit ini? (y/n): " confirm
+        if [[ "$confirm" == "y" ]]; then
+            git add "$selected_file"
+            git commit -m "$commit_msg"
+            echo "Commit berhasil."
+        fi
+    else
+        echo "Pilihan tidak valid."
+    fi
+
+    echo ""
+done
