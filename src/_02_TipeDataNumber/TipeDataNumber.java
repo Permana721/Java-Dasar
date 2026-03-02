@@ -5,7 +5,6 @@ package _02_TipeDataNumber;
     * Tipe data byte, short, int, dan long digunakan untuk menyimpan nilai bilangan bulat (integer)
     * Tipe data float dan double digunakan untuk menyimpan nilai bilangan desimal (floating point)
     * Tipe data number juga dapat menyimpan nilai dalam format heksadesimal dan biner
-    * Untuk memudahkan membaca angka yang sangat banyak, kita dapat menggunakan underscore (_) sebagai pemisah ribuan
  */
 public class TipeDataNumber {
     public static void main(String[] args) {
