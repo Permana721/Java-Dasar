@@ -1,5 +1,5 @@
 package _02_TipeDataNumber;
-
+// Konversi Number adalah proses mengubah nilai dari satu tipe data number ke tipe data number lainnya
 public class KonversiNumber {
     public static void main(String[] args) {
         byte iniByte = 100;

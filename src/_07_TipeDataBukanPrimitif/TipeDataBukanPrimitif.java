@@ -5,6 +5,7 @@ package _07_TipeDataBukanPrimitif;
  * Tipe data String bukan tipe data primitif, tipe data bukan primitif tidak memiliki default value, dan bisa bernilai null
  * Tipe data bukan primitif bisa memiliki method/function (yang akan dibahas nanti)
  * Di Java, semua tipe data primitif memiliki representasi tipe data bukan primitif nya
+ * Tipe data bukan primitif juga bisa digunakan untuk menyimpan data number, char, boolean, dan String, namun dengan fitur tambahan yang tidak dimiliki oleh tipe data primitif
  */
 public class TipeDataBukanPrimitif {
     public static void main(String[] args) {
