@@ -2,6 +2,7 @@ package _08_TipeDataArray;
 /**
  * Array adalah tipe data yang berisikan kumpulan data dengan tipe yang sama
  * Jumlah data di Array tidak bisa berubah setelah pertama kali dibuat
+ * Array bisa menyimpan tipe data primitif maupun tipe data bukan primitif
  */
 public class Array {
     public static void main(String[] args) {
