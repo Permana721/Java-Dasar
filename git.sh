@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-MODEL="mistral:7b-instruct-q4_K_M"   # Model quantized untuk CPU
-MAX_DIFF_LINES=100
+MODEL="tinyllama:latest"   # Model quantized untuk CPU
+MAX_DIFF_LINES=50
 
 function get_changed_files() {
     git status --porcelain | awk '{print $2}'
@@ -12,24 +12,27 @@ function generate_commit_message() {
 
     diff_content=$(git diff "$file" | head -n $MAX_DIFF_LINES)
 
-    prompt="
-You are an expert software engineer.
-Generate a concise and professional git commit message
-using Conventional Commits standard.
-
-Rules:
-- Use one of: feat, fix, refactor, chore, docs, style, test, perf
-- Format: type(scope): short summary
-- Maximum 72 characters
-- No explanation, only the commit message
-
-File: $file
+    prompt="Generate ONE git commit message.
+Format strictly:
+type(scope): short summary
+Allowed types: feat, fix, refactor, chore, docs, style, test, perf.
+Max 72 characters.
+No explanation.
 
 Diff:
-$diff_content
-"
+$diff_content"
 
-    echo "$prompt" | ollama run "$MODEL"
+    raw_output=$(ollama run "$MODEL" <<< "$prompt")
+
+    # Ambil baris pertama saja
+    commit_msg=$(echo "$raw_output" | head -n 1 | tr -d '"' | tr -d '`')
+
+    # Validasi Conventional Commit format
+    if [[ ! $commit_msg =~ ^(feat|fix|refactor|chore|docs|style|test|perf)\(.*\):\ .* ]]; then
+        commit_msg="chore($file): update $file"
+    fi
+
+    echo "$commit_msg"
 }
 
 while true; do
@@ -57,7 +60,7 @@ while true; do
         selected_file="${files[$((choice-1))]}"
 
         echo "Generating commit message untuk $selected_file..."
-        commit_msg=$(generate_commit_message "$selected_file")
+        commit_msg=$(generate_commit_message "$selected_file" | head -n 1 | tr -d '"' | tr -d '`')
 
         echo "----------------------------------"
         echo "Suggested Commit Message:"
