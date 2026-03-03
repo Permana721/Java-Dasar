@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-MODEL="mistral"   # Ganti sesuai model lokal kamu
-MAX_DIFF_LINES=300
+MODEL="mistral:7b-instruct-q4_K_M"   # Model quantized untuk CPU
+MAX_DIFF_LINES=100
 
 function get_changed_files() {
     git status --porcelain | awk '{print $2}'
